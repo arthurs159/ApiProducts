@@ -16,7 +16,7 @@ public class ProductService {
 
 	@Autowired
 	ProductRepository repository;
-	
+
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> product = repository.findById(id);
@@ -24,8 +24,10 @@ public class ProductService {
 		return new ProductDTO(entity);
 	}
 	
-	public Page<ProductDTO> findAllPaged(Pageable pageable){
-		
+	@Transactional(readOnly = true)
+	public Page<ProductDTO> findAllPaged(Pageable pageable) {
+		Page<Product> page = repository.findAll(pageable);
+		return page.map(x -> new ProductDTO(x));
 	}
 	
 }

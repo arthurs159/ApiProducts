@@ -27,8 +27,6 @@ public class User implements Serializable{
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String email;
-	private String firstName;
-	private String lastName;
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -40,14 +38,10 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews = new ArrayList<>();
 	
-	public User(Long id, String email, String firstName, String lastName, Set<Role> roles, List<Review> reviews) {
-
+	public User(Long id, String email, Set<Role> roles, List<Review> reviews) {
 		this.id = id;
 		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.roles = roles;
-		this.reviews = reviews;
 	}
 
 	public User() {
@@ -72,22 +66,6 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public Set<Role> getRoles() {
 		return roles;
 	}
