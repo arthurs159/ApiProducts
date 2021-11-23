@@ -2,9 +2,7 @@ package com.projeto.apiproducts.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,10 +35,14 @@ public class Product implements Serializable {
 	@JoinTable(name = "tb_product_category", 
 			joinColumns = @JoinColumn(name = "product_id"), 
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	Set<Category> categories = new HashSet<>();
+	List<Category> categories = new ArrayList<>();
+	
+	public Product() {
+		
+	}
 
 	public Product(Long id, String name, String description, Double price, String imgUrl, List<Review> reviews,
-			Set<Category> categories) {
+			List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -94,7 +96,7 @@ public class Product implements Serializable {
 		return reviews;
 	}
 
-	public Set<Category> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 
