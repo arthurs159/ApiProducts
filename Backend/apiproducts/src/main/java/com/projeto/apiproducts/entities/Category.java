@@ -1,15 +1,13 @@
 package com.projeto.apiproducts.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -24,16 +22,12 @@ public class Category implements Serializable {
 	private Long id;
 	private String name;
 
-	@ManyToMany
-	@JoinTable(name = "tb_product",
-			joinColumns = @JoinColumn(name = "product_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<Category> categories = new ArrayList<>();
+	@ManyToMany(mappedBy = "categories")
+	private Set<Product> products = new HashSet<>();
 
-	public Category(Long id, String name, List<Category> categories) {
+	public Category(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.categories = categories;
 	}
 
 	public Category() {
@@ -56,8 +50,8 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
-	public List<Category> getCategories() {
-		return categories;
+	public Set<Product> getProducts() {
+		return products;
 	}
 
 	@Override

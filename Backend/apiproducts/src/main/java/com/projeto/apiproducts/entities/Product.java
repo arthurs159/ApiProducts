@@ -2,8 +2,11 @@ package com.projeto.apiproducts.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +27,8 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	private Double price;
 	private String imgUrl;
@@ -35,21 +40,18 @@ public class Product implements Serializable {
 	@JoinTable(name = "tb_product_category", 
 			joinColumns = @JoinColumn(name = "product_id"), 
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	List<Category> categories = new ArrayList<>();
+	Set<Category> categories = new HashSet<>();
 	
 	public Product() {
 		
 	}
 
-	public Product(Long id, String name, String description, Double price, String imgUrl, List<Review> reviews,
-			List<Category> categories) {
+	public Product(Long id, String name, String description, Double price, String imgUrl) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
-		this.reviews = reviews;
-		this.categories = categories;
 	}
 
 	public Long getId() {
@@ -96,7 +98,7 @@ public class Product implements Serializable {
 		return reviews;
 	}
 
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
