@@ -7,7 +7,7 @@ public class ReviewDTO {
 	private Long id;
 	private String text;
 	private Long productId;
-	private UserDTO user;
+	private Long userId;
 	
 	public ReviewDTO() {
 	}
@@ -16,7 +16,7 @@ public class ReviewDTO {
 		id = entity.getId();
 		text = entity.getText();
 		productId = entity.getProduct().getId();
-		user = new UserDTO(entity.getUser());
+		userId = entity.getUser().getId();
 	}
 
 	public Long getId() {
@@ -43,12 +43,12 @@ public class ReviewDTO {
 		this.productId = productId;
 	}
 
-	public UserDTO getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(UserDTO user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

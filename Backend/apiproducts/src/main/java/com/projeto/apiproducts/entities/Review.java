@@ -63,6 +63,14 @@ public class Review implements Serializable {
 	public Product getProduct() {
 		return product;
 	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	@Override
 	public int hashCode() {
