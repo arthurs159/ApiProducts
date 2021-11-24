@@ -2,9 +2,7 @@ package com.projeto.apiproducts.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import com.projeto.apiproducts.entities.Category;
 import com.projeto.apiproducts.entities.Product;
 
 public class ProductDTO {
@@ -35,13 +33,9 @@ public class ProductDTO {
 		description = entity.getDescription();
 		price = entity.getPrice();
 		imgUrl = entity.getImgUrl();
+		entity.getCategories().forEach(category -> this.categories.add(new CategoryDTO(category)));
 	}
 	
-	public ProductDTO(Product entity, Set<Category> categories) {
-		this(entity);
-		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
-	}
-
 	public Long getId() {
 		return id;
 	}

@@ -32,14 +32,14 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll() {
-		List<User> categories = repository.findAll();
-		return categories.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		List<User> user = repository.findAll();
+		return user.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
-		Optional<User> product = repository.findById(id);
-		User entity = product.orElseThrow(() -> new ResourceNotFoundException("Id Não encontrado"));
+		Optional<User> user = repository.findById(id);
+		User entity = user.orElseThrow(() -> new ResourceNotFoundException("Id Não encontrado"));
 		return new UserDTO(entity);
 	}
 	
@@ -78,7 +78,6 @@ public class UserService {
 	
 	public void dtoToEntity(UserDTO dto, User entity) {
 		entity.setEmail(dto.getEmail());
-
 		entity.getRoles().clear();
 
 		for (RoleDTO cDto : dto.getRoles()) {

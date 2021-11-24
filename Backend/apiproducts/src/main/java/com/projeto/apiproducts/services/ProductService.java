@@ -1,7 +1,5 @@
 package com.projeto.apiproducts.services;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -36,17 +34,15 @@ public class ProductService {
 	public ProductDTO findById(Long id) {
 		Optional<Product> product = repository.findById(id);
 		Product entity = product.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new ProductDTO(entity , entity.getCategories());
+		return new ProductDTO(entity);
 	}
-
+	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
-		List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepository.getOne(categoryId));
-		Page<Product> page = repository.find(categories, name.trim(), pageable);
-		repository.findProductsWithCategories(page.getContent());
-		return page.map(x -> new ProductDTO(x, x.getCategories()));
+	public Page<ProductDTO> findAllPaged(Pageable pageable) {
+		Page<Product> page = repository.findAll(pageable);
+		return page.map(x -> new ProductDTO(x));
 	}
-
+	
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
