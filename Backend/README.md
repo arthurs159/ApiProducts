@@ -14,3 +14,17 @@ Utilizei esse diagrama criado por mim para criar o relacionamento entre as entid
 * Projeto feito em camadas
 * DTO
 * Tratamento de exceções.
+
+
+
+Deploy no heroku:
+
+https://api-productandreview.herokuapp.com/
+
+/products
+
+/categories
+
+/user
+
+/reviews
