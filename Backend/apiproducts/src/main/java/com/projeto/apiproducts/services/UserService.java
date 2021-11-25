@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,6 +21,7 @@ import com.projeto.apiproducts.repositories.RoleRepository;
 import com.projeto.apiproducts.repositories.UserRepository;
 import com.projeto.apiproducts.services.exception.DatabaseException;
 import com.projeto.apiproducts.services.exception.ResourceNotFoundException;
+import com.projeto.apiproducts.services.exception.ConstraintViolation;
 
 @Service
 public class UserService {
@@ -73,8 +75,10 @@ public class UserService {
 			throw new DatabaseException("ID não pode ser apagado (Integrity Violation) =(");
 		}catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("ID não encontrado =(  id = " + id);
-		}
+		}catch(ConstraintViolationException e) {
+			throw new ConstraintViolation("ID não pode ser apagado pois existem items ligados a ela");
 	}
+}
 	
 	public void dtoToEntity(UserDTO dto, User entity) {
 		entity.setFirstName(dto.getFirstName());
