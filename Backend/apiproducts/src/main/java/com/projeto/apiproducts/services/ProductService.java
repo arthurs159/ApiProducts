@@ -18,6 +18,7 @@ import com.projeto.apiproducts.entities.Category;
 import com.projeto.apiproducts.entities.Product;
 import com.projeto.apiproducts.repositories.CategoryRepository;
 import com.projeto.apiproducts.repositories.ProductRepository;
+import com.projeto.apiproducts.repositories.ReviewRepository;
 import com.projeto.apiproducts.services.exception.DatabaseException;
 import com.projeto.apiproducts.services.exception.ResourceNotFoundException;
 
@@ -29,6 +30,11 @@ public class ProductService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
+	
+	
 
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
@@ -63,9 +69,10 @@ public class ProductService {
 		}
 	}
 
-	@Transactional
+	
 	public void delete(Long id) {
 		try {
+			reviewRepository.deleteById(id);
 			repository.deleteById(id);
 		}catch(ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("ID não encontrado =(  id = " + id);

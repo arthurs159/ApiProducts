@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +35,13 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 
-	@OneToMany(mappedBy = "product")
-	List<Review> reviews = new ArrayList<>();
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Review> reviews = new ArrayList<>();
 
-	@ManyToMany
-	@JoinTable(name = "tb_product_category", 
-			joinColumns = @JoinColumn(name = "product_id"), 
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_product_category",
+		joinColumns = @JoinColumn(name = "product_id"),
+		inverseJoinColumns = @JoinColumn(name = "category_id"))
 	Set<Category> categories = new HashSet<>();
 	
 	public Product() {

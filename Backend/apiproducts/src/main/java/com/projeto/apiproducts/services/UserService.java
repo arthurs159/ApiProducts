@@ -77,7 +77,10 @@ public class UserService {
 	}
 	
 	public void dtoToEntity(UserDTO dto, User entity) {
+		entity.setFirstName(dto.getFirstName());
+		entity.setLastName(dto.getLastName());
 		entity.setEmail(dto.getEmail());
+		
 		entity.getRoles().clear();
 
 		for (RoleDTO cDto : dto.getRoles()) {

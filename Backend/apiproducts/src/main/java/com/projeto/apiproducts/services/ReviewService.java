@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import com.projeto.apiproducts.entities.User;
 import com.projeto.apiproducts.repositories.ProductRepository;
 import com.projeto.apiproducts.repositories.ReviewRepository;
 import com.projeto.apiproducts.repositories.UserRepository;
+import com.projeto.apiproducts.services.exception.DatabaseException;
 import com.projeto.apiproducts.services.exception.ResourceNotFoundException;
 
 @Service
@@ -53,7 +56,18 @@ public class ReviewService {
 			throw new ResourceNotFoundException("ID do usuário não encontrado =( ");
 
 		}
-		
+	}
+	
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		}catch(ResourceNotFoundException e) {
+			throw new ResourceNotFoundException("ID não encontrado =(  id = " + id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("ID não pode ser apagado (Integrity Violation) =(");
+		}catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("ID não encontrado =(  id = " + id);
+		}
 	}
 
 }

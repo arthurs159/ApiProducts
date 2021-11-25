@@ -1,7 +1,7 @@
-INSERT INTO tb_user (email, password) VALUES ('arthur@gmail.com', '123456');
-INSERT INTO tb_user (email, password) VALUES ('bob@gmail.com', '123456');
-INSERT INTO tb_user (email, password) VALUES ('Jao@gmail.com', '123456');
-INSERT INTO tb_user (email, password) VALUES ('Cleb@gmail.com', '123456');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Arthur', 'Scarpati', 'arthur@gmail.com', '123456');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Bob', 'Brown', 'bob@gmail.com', '123456');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Bruce', 'Wayne', 'Jao@gmail.com', '123456');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Hal', 'Jordan', 'Cleb@gmail.com', '123456');
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADM');
 INSERT INTO tb_role (authority) VALUES ('ROLE_MEMBER');

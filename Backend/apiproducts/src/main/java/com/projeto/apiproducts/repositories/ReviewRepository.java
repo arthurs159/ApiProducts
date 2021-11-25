@@ -6,6 +6,4 @@ import com.projeto.apiproducts.entities.Review;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 	
-	
-
 }

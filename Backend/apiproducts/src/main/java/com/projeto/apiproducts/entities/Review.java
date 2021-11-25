@@ -24,11 +24,11 @@ public class Review implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "product_id")
 	private Product product;
 
