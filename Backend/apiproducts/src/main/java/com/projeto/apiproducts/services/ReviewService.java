@@ -1,6 +1,7 @@
 package com.projeto.apiproducts.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,13 @@ public class ReviewService {
 	public List<ReviewDTO> listAll(ReviewDTO dto) {
 			List<Review> allReview = repository.findAll();
 			return allReview.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public ReviewDTO getById(Long id) {
+		Optional<Review> review = repository.findById(id);
+		Review entity = review.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional

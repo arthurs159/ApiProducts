@@ -10,19 +10,22 @@ public class CategoryDTO implements Serializable{
 
 	private Long id;
 	private String name;
+	private String url;
 
 	public CategoryDTO() {
 
 	}
 
-	public CategoryDTO(Long id, String name) {
+	public CategoryDTO(Long id, String name, String url) {
 		this.id = id;
 		this.name = name;
+		this.url = url;
 	}
 
 	public CategoryDTO(Category entity) {
 		id = entity.getId();
 		name = entity.getName();
+		url = entity.getUrl();
 	}
 
 	public Long getId() {
@@ -40,7 +43,13 @@ public class CategoryDTO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 }

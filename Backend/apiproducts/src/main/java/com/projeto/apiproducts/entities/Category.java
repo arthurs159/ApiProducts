@@ -21,13 +21,15 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private String url;
 
 	@ManyToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
 
-	public Category(Long id, String name) {
+	public Category(Long id, String name, String url) {
 		this.id = id;
 		this.name = name;
+		this.url = url;
 	}
 
 	public Category() {
@@ -50,6 +52,14 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}

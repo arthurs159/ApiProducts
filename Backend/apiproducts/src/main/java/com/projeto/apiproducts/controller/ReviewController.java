@@ -30,6 +30,12 @@ public class ReviewController {
 		return ResponseEntity.ok().body(review);
 	}
 	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ReviewDTO> getById(@PathVariable Long id) {
+		ReviewDTO dto = service.getById(id);
+		return ResponseEntity.ok().body(dto);
+	}
+	
 	@PostMapping
 	public ResponseEntity<ReviewDTO> insert (@RequestBody ReviewDTO dto) {
 		dto = service.insert(dto);
